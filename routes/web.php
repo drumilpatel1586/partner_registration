@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\partner\Country_State_City_Controller;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Partner\CaptchaController;
+use App\Http\Controllers\partner\PartnerRegistrationController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -15,6 +16,8 @@ Route::get('partner_registration', [Country_State_City_Controller::class,'render
 Route::get('states/{country_id}', [Country_State_City_Controller::class,'getstates']);
 Route::get('cities/{state_id}', [Country_State_City_Controller::class,'getcities']);
 Route::get('reloadCaptcha', [CaptchaController::class,'reloadCaptcha']);
+Route::post('partner_registration', [PartnerRegistrationController::class,'formValidation']);
+
 
 // Route::get('test', [Country_State_City_Controller::class,'captcha_genrator']);
 
@@ -23,6 +26,5 @@ Route::prefix('admin')->group(function () {
     Route::get('dashboard', [AdminController::class,'dashboard']);
 });
 
-Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

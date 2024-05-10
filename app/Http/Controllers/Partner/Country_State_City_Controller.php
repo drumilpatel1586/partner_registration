@@ -14,7 +14,7 @@ class Country_State_City_Controller extends Controller
 {
     public function getcountries()
     {
-        $countries = DB::table('countries')->get()->toArray();
+        $countries = DB::table('countries')->where('is_active',true)->get()->toArray();
         return $countries;
     }
 

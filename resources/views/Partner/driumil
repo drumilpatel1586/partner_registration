@@ -1,8 +1,147 @@
+body {
+  height: 100%;
+  margin: 0;
+  background: url("https://partner.qntmnet.com/public/images/qn_white.jpg")  no-repeat center center fixed;
+  background-size: cover;
+}
+
+.partner_form {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 40% !important;
+  height: 600px !important;
+  margin: 20px 120px 20px 20px !important;
+}
+
+.partner_form_container {
+  background-color: #f2f2f2 !important;
+  box-shadow: 0px 1px 20px #ccc;
+}
+
+.partner_registration-logo {  
+  margin-top: 2px;
+  width: 216px;
+  text-align: center;
+}
+
+.form-control {
+  margin-top: -10px;
+  width: 100%;
+  height: 30px;
+  border-color: #d2d6de;
+  border-right: 1px solid red;
+  font-size: 1.0rem;
+  border-radius: 25px;
+  padding: 21px 25px 16px 20px;
+}
+
+.form-select {
+  color: #6b6d71;
+  margin-top: -10px;
+  width: 100%;
+  height: 40px !important;
+  border-color: #d2d6de;
+  border-right: 1px solid red;
+  font-size: 1.0rem;
+  border-radius: 25px;
+  padding: 9px 25px 16px 20px;
+}
+
+.form-span {
+  color: #2e3192;
+}
+
+.hr {
+  color: #2e3192;
+}
+
+.submit_btn {
+  text-align: right;
+}
+
+.btn {
+  cursor: pointer;
+  color: #ffffff;
+  font-size: 18px;
+  background-color: #2E3192;
+  border-color: #2E3192;
+  border-radius: 25px;
+  padding: 10px 50px;
+  justify-content: flex-end;
+}
+
+.qntmlogo {
+  max-width: 100%;
+  height: 100px;
+}
+
+.captcha_img{
+  margin-top: 50px;
+}
+
+.partner_form_footer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.iti__country-name {
+  color: #6b6d71;
+}
+
+.reload{
+  color: #2E3192;
+}
+
+.iti {
+  position: relative !important;
+  display: block !important;
+}
+
+@media (max-width: 768px) {
+  .qntmlogo {
+    max-width: 70%;
+    width: 150px;
+    height: 63px;
+  }
+
+  .partner_form {
+    width: 100% !important;
+    padding: 20px !important;
+    margin-top: 0px !important;
+    margin-right: 0px !important;
+  }
+
+.captcha_img{
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  margin-top: 30px;  
+}
+
+  .partner_form_footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+  }
+
+  .btn{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 100%;
+    padding: 10px 50px;
+    font-size: 16px;
+  }
+}
+
 <!doctype html>
 <html lang="en">
 
 <head>
-    <!-- meta tags -->
+    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -30,7 +169,7 @@
 
 <body>
     <div class="partner_form">
-        <section class="container partner_form_container text-light p-2 dummy">
+        <section class="container partner_form_container text-light p-2">
 
             {{-- form logo --}}
             <div class="container-fluid text-light">
@@ -46,9 +185,7 @@
                 </div>
             </div>
 
-            <form class="row g-3 p-4" method="post" action="/partner_registration">
-                @csrf
-               
+            <form class="row g-3 p-4">
                 {{-- General Information --}}
                 <div class="col-md-12">
                     <span class="form-span">General Information</span>
@@ -56,12 +193,10 @@
                 </div>
 
                 <div class="col-md-6">
-                    <input type="text" class="form-control" name="company_name" value="{{ old('company_name') }}" placeholder="Company Name">
-                    <span class="text-danger">{{ $errors->first('company_name') }}</span>
+                    <input type="text" class="form-control" name="company_name" placeholder="Company Name" required>
                 </div>
                 <div class="col-md-6">
-                    <input type="text" class="form-control" name="address" value="{{old('address')}}" placeholder="Address">
-                    <span class="text-danger">{{ $errors->first('address') }}</span>
+                    <input type="text" class="form-control" name="address" placeholder="Address" required>
                 </div>
 
                 <div class="col-md-6">
@@ -70,12 +205,9 @@
                         aria-label="Default select example">
                         <option selected disabled>Select Country</option>
                         @foreach ($countries as $country)
-                            <option value="{{ $country->id }}" data-country-shortname="{{ $country->shortname }}">
-                                {{ $country->name }}
-                            </option>
+                            <option value="{{ $country->id }}">{{ $country->name }}</option>
                         @endforeach
                     </select>
-                    <span class="text-danger">{{ $errors->first('select_country') }}</span>
 
                 </div>
                 <div class="col-md-6">
@@ -84,7 +216,6 @@
                         aria-label="Default select example">
                         <option selected disabled>Select State</option>
                     </select>
-                    <span class="text-danger">{{ $errors->first('select_state') }}</span>
                 </div>
 
                 <div class="col-md-6">
@@ -93,20 +224,16 @@
                         aria-label="Default select example">
                         <option selected disabled>Select City</option>
                     </select>
-                    <span class="text-danger">{{ $errors->first('select_city') }}</span>
                 </div>
                 <div class="col-md-6">
-                    <input type="tel" maxlength="6" class="form-control" name="zip" value="{{old('zip')}}" placeholder="Zip">
-                    <span class="text-danger">{{ $errors->first('zip') }}</span>
+                    <input type="tel" maxlength="6" class="form-control" name="zip" placeholder="Zip">
                 </div>
 
                 <div class="col-md-6">
-                    <input type="text" class="form-control" name="website" value="{{old('website')}}" placeholder="Website">
-                    <span class="text-danger">{{ $errors->first('website') }}</span>
+                    <input type="text" class="form-control" name="website" placeholder="Website">
                 </div>
                 <div class="col-md-6">
-                    <input type="tel" maxlength="10" class="form-control" value="{{old('landline')}}" name="landline" placeholder="Landline">
-                    <span class="text-danger">{{ $errors->first('landline') }}</span>
+                    <input type="tel" class="form-control" name="landline" placeholder="Landline">
                 </div>
                 {{-- General Information End --}}
 
@@ -117,39 +244,28 @@
                 </div>
 
                 <div class="col-md-6">
-                    <input type="text" class="form-control" name="first_name" value="{{old('first_name')}}" placeholder="First Name">
-                    <span class="text-danger">{{ $errors->first('first_name') }}</span>
+                    <input type="text" class="form-control" name="first_name" placeholder="First Name" required>
                 </div>
                 <div class="col-md-6">
-                    <input type="text" class="form-control" name="last_name" value="{{old('last_name')}}" placeholder="Last Name">
-                    <span class="text-danger">{{ $errors->first('last_name') }}</span>
+                    <input type="text" class="form-control" name="last_name" placeholder="Last Name" required>
                 </div>
 
                 <div class="col-md-6">
-                    <input type="text" class="form-control" name="job_title" value="{{old('job_title')}}" placeholder="Job Title">
-                    <span class="text-danger">{{ $errors->first('job_title') }}</span>
+                    <input type="text" class="form-control" name="job_title" placeholder="Job Title" required>
                 </div>
-                <div class="col-md-6">
-                    <div class="mobile_no form-control">
+                <div class="col-md-6 mt-2">
+                    <input type="tel" id="phone" class="mobile_no form-control" placeholder="Enter phone number"
+                        required>
 
-                        <img class="flag" id="flagContainer" src="">
-
-                        <input style="border-color: transparent; outline: none;" maxlength="10" name="mobile"
-                            type="tel" class="mobile" value="{{old('mobile')}}" placeholder="Mobile">
-
-
-                    </div>
-                    <span class="text-danger">{{ $errors->first('mobile') }}</span>
+                    <script></script>
                 </div>
 
                 <div class="col-md-6">
-                    <input type="text" maxlength="10" value="{{old('personal_landline')}}" class="form-control" name="personal_landline"
-                        placeholder="Landline">
-                    <span class="text-danger">{{ $errors->first('personal_landline') }}</span>
+                    <input type="text" maxlength="10" class="form-control" name="personal_landline"
+                        placeholder="Landline" required>
                 </div>
                 <div class="col-md-6">
-                    <input type="mail" class="form-control" value="{{old('mail')}}" name="mail" placeholder="Email">
-                    <span class="text-danger">{{ $errors->first('mail') }}</span>
+                    <input type="mail" class="form-control" name="mail" placeholder="Email" required>
                 </div>
 
                 {{-- Contact Information End --}}
@@ -158,6 +274,7 @@
 
                     <div class="col-12">
                         <span>{!! captcha_img('math') !!}</span>
+
                         <button type="button" class="reload" id="reload">&#x21bb;</button>
                     </div>
 
@@ -166,8 +283,7 @@
                 <div class="partner_form_footer">
 
                     <div class="col-6">
-                        <input type="text" class="form-control" name="captcha" placeholder="Enter Captcha">
-                        <span class="text-danger">{{ $errors->first('captcha') }}</span>
+                        <input type="text" class="form-control" name="captcha" placeholder="Enter Captcha" required>
                     </div>
 
                     <div class="col-6 submit_btn">
@@ -181,40 +297,19 @@
     </div>
 
 
-    {{-- #################################  js files  ################################## --}}
+    {{-- js files --}}
 
     {{-- js for captcha --}}
     <script>
         $('#reload').click(function() {
             $.ajax({
                 type: 'GET',
-                url: 'reloadCaptcha',
+                url:'reloadCaptcha',
                 success: function(data) {
                     $('.captcha_img span').html(data.captcha);
                 }
             })
         })
-    </script>
-
-    {{-- js for selected country flag and mobileno. --}}
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const countrySelect = document.getElementById('select_country');
-            const flagImg = document.getElementById('flagContainer');
-
-            countrySelect.addEventListener('change', function() {
-                const selectedOption = countrySelect.options[countrySelect.selectedIndex];
-                const countryShortname = selectedOption.getAttribute('data-country-shortname');
-
-                if (countryShortname) {
-                    // Set the src attribute of the flagImg
-                    flagImg.src = `https://flagsapi.com/${countryShortname}/shiny/32.png`;
-                } else {
-                    // Clear the src attribute if no country is selected
-                    flagImg.src = '';
-                }
-            });
-        });
     </script>
 
     {{-- js for country flag and mobileno. --}}

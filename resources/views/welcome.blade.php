@@ -168,5 +168,13 @@
                 </div>
             </div>
         </div>
+        <script>
+            window.onload = function() {
+                var successMessage = "{{ session('success') }}";
+                if (successMessage) {
+                    alert(successMessage);
+                }
+            }
+        </script>
     </body>
 </html>

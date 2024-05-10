@@ -4,19 +4,23 @@ body {
   background: url("https://partner.qntmnet.com/public/images/qn_white.jpg")  no-repeat center center fixed;
   background-size: cover;
 }
+.dummy{
+  background-color: red;
+}
 
 .partner_form {
   position: absolute;
   top: 0;
   right: 0;
   width: 40% !important;
-  height: 600px !important;
+  /* height: 600px !important; */
   margin: 20px 120px 20px 20px !important;
 }
 
 .partner_form_container {
   background-color: #f2f2f2 !important;
   box-shadow: 0px 1px 20px #ccc;
+  margin-bottom: 20px;
 }
 
 .partner_registration-logo {  
@@ -98,6 +102,19 @@ body {
 .iti {
   position: relative !important;
   display: block !important;
+}
+
+.mobile_no{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.mobile{
+  height: 20px;
+  max-width: 80%;
+  border: none;
+  margin-left: 10px;
 }
 
 @media (max-width: 768px) {
