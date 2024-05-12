@@ -6,11 +6,14 @@ use Illuminate\Http\Request;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
+use App\Jobs\SendVerificationEmailJob;
+
 class PhpMailerController extends Controller
 {
-    public function supportedthings(){
-        $supported_mail='drumilpatel1586@gmail.com';
-        $supported_phone=18001231163;
+    public function supportedthings()
+    {
+        $supported_mail = 'drumilpatel1586@gmail.com';
+        $supported_phone = 18001231163;
         return [
             "supported_mail" => $supported_mail,
             "supported_phone" => $supported_phone
@@ -18,54 +21,20 @@ class PhpMailerController extends Controller
     }
     public function verficationmailsenderToPartner(Request $request)
     {
-
-        $supported = $this->supportedthings();
-        $supported_mail = $supported['supported_mail'];
-        $supported_phone = $supported['supported_phone'];
-
-        require base_path('vendor/autoload.php');
-        $mail = new Phpmailer(true);
-
         try {
-            $mail->isSMTP();
-            $mail->Host       = 'smtp.gmail.com';
-            $mail->SMTPAuth   = true;
-            $mail->Username   = 'noblecausesamd@gmail.com';
-            $mail->Password   = 'orwc htbg ydcq ecke';
-            $mail->SMTPSecure = 'tls';
-            $mail->Port       = 587;
+            // Get supported mail and phone
+            $supported = $this->supportedthings();
+            $supportedMail = $supported['supported_mail'];
+            $supportedPhone = $supported['supported_phone'];
 
-            $mail->setFrom(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME'));
-            $mail->addAddress($request->mail, $request->first_name);
+            // Dispatch a job to send the email in the background
+            SendVerificationEmailJob::dispatch($request->all(), $supportedMail, $supportedPhone);
 
-            $mail->isHTML(true);
-            $mail->Subject = 'Account Verification Required - Please Confirm Your Email Address';
-            $mail->Body = "Dear $request->first_name $request->last_name,
-            <br>
-
-            <p>Thank you for registering with Quantum Network. To ensure the security and integrity of your account, we kindly request that you verify your email address.</p>
-    
-            <p>Please click on the following link to verify your email:</p>
-            
-            <p><a href='" . route('verified_email')  . "'>Verify Email</a></p>
-            
-            <p>By verifying your email address, you will gain full access to your account and enjoy all the benefits and features offered by Quantum Network.</p>
-            
-            <p>If you did not create an account with Quantum Network, please ignore this email. Your security is important to us, and we apologize for any inconvenience caused.</p>
-            
-            <p>If you have any questions or need assistance, please feel free to contact our support team at <a href=$supported_mail> $supported_mail </a> or <a href='tel:$supported_phone'>$supported_phone</a>.</p>
-            
-            <p>Thank you for choosing Quantum Network. We look forward to serving you.</p>
-            
-            <p>Best regards,<br>Quantum Network</p>";
-
-            if (!$mail->send()) {
-                echo 'Mail send failed';
-            } else {
-                echo 'Mail sent successfully';
-            }
+            // Redirect the user to another page
+            return redirect('/')->with('success','Partner Successfully Registered, For Security reasons please verify your email address, We have sent you a verification email on registered email address.');
         } catch (Exception $e) {
-            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+            // Handle any exceptions that may occur
+            return redirect('/')->with('error', 'Failed to send verification email');
         }
     }
 }
