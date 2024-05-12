@@ -22,7 +22,7 @@ class Country_State_City_Controller extends Controller
     {
         $countries = $this->getcountries();
         // dd($countries);
-        return view('partner/partner_registration', ['countries' => $countries]);
+        return view('partner/partner_registration', ['countries' => $countries]);   
     }
 
     public function getStates($country_id)

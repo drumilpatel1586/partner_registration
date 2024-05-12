@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\partner;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Database\Eloquent\Model;
+// use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use App\Models\Partner\Partner;
+// use PHPMailer\PHPMailer\PHPMailer;
+// use PHPMailer\PHPMailer\Exception;
+use Illuminate\Support\Facades\Redirect;
 
 class PartnerRegistrationController extends Controller
 {
@@ -32,21 +35,66 @@ class PartnerRegistrationController extends Controller
         Partner::create([
             'company_name' => $request->company_name,
             'company_address' => $request->address,
-           'select_country' => $request->select_country,
-           'select_state' => $request->select_state,
-           'select_city' => $request->select_city,
+            'company_country' => $request->select_country,
+            'company_state' => $request->select_state,
+            'company_city' => $request->select_city,
             'company_zip_code' => $request->zip,
             'company_website' => $request->website,
             'company_landline' => $request->landline,
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
             'job_title' => $request->job_title,
-           'mobile' => $request->mobile,
+            'mobile' => $request->mobile,
             'landline' => $request->personal_landline,
-           'email' => $request->mail
+            'email' => $request->mail
         ]);
 
-        return redirect('/')->with('success', 'Registration Successfully, Please verify your mail address, we have sent you a mail notification on your registered mail account.');
+        $request = http_build_query($request->all());
+        return Redirect::to("/e_verification_mail?$request");
 
+        // require base_path('vendor/autoload.php');
+        // $mail = new Phpmailer(true);
+
+        // try {
+        //     $mail->isSMTP();
+        //     $mail->Host       = 'smtp.gmail.com';
+        //     $mail->SMTPAuth   = true;
+        //     $mail->Username   = 'noblecausesamd@gmail.com';
+        //     $mail->Password   = 'orwc htbg ydcq ecke';
+        //     $mail->SMTPSecure = 'tls';  // Corrected from 'tsl'
+        //     $mail->Port       = 587;
+
+        //     $mail->setFrom(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME'));
+        //     $mail->addAddress($request->mail, $request->first_name);
+
+        //     $mail->isHTML(true);
+        //     $mail->Subject = 'Account Verification Required - Please Confirm Your Email Address';
+        //     $mail->Body = "Dear $request->first_name $request->last_name,
+        //     <br>
+
+        //     <p>Thank you for registering with Quantum Network. To ensure the security and integrity of your account, we kindly request that you verify your email address.</p>
+    
+        //     <p>Please click on the following link to verify your email:</p>
+            
+        //     <p><a href='https://127.0.0.1:8000/verified_email'>Verify Email</a></p>
+            
+        //     <p>By verifying your email address, you will gain full access to your account and enjoy all the benefits and features offered by Quantum Network.</p>
+            
+        //     <p>If you did not create an account with Quantum Network, please ignore this email. Your security is important to us, and we apologize for any inconvenience caused.</p>
+            
+        //     <p>If you have any questions or need assistance, please feel free to contact our support team at <a href='" . env('SUPPORT_EMAIL') . "'>" . env('SUPPORT_EMAIL') . "</a> or <a href='tel:" . env('SUPPORT_PHONE') . "'>" . env('SUPPORT_PHONE') . "</a>.</p>
+            
+        //     <p>Thank you for choosing Quantum Network. We look forward to serving you.</p>
+            
+        //     <p>Best regards,<br>Quantum Network</p>";
+
+        //     if (!$mail->send()) {
+        //         echo 'Mail send failed';
+        //     } else {
+        //         echo 'Mail sent successfully';
+        //     }
+        // } catch (Exception $e) {
+        //     echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        // }
     }
 }

@@ -46,7 +46,7 @@
                 </div>
             </div>
 
-            <form class="row g-3 p-4" method="post" action="/partner_registration">
+            <form class="row g-3 p-4" method="post" action="{{ route('partner.registration') }}">
                 @csrf
                
                 {{-- General Information --}}
