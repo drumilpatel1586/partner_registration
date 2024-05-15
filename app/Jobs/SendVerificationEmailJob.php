@@ -9,6 +9,8 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class SendVerificationEmailJob implements ShouldQueue
 {
@@ -28,6 +30,16 @@ class SendVerificationEmailJob implements ShouldQueue
     public function handle()
     {
         try {
+            // Generate a unique verification token
+            $verificationToken = Str::random(40);
+            
+            // Store the verification token along with the user's email address in the database
+            DB::table('verification_tokens')->insert([
+                'email' => $this->formData['mail'],
+                'token' => $verificationToken,
+                'created_at' => now(),
+            ]);
+
             // Initialize PHPMailer
             $mail = new PHPMailer(true);
 
@@ -45,10 +57,15 @@ class SendVerificationEmailJob implements ShouldQueue
             $mail->addAddress($this->formData['mail'], $this->formData['first_name']);
             $mail->isHTML(true);
             $mail->Subject = 'Account Verification Required - Please Confirm Your Email Address';
+            
+            // Create the verification link with the verification token as a query parameter
+            $verificationUrl = route('verify_email', ['token' => $verificationToken]);
+            
+            // Set the email body with the verification link
             $mail->Body = "Dear {$this->formData['first_name']} {$this->formData['last_name']},<br><br>" .
                 "<p>Thank you for registering with Quantum Network. To ensure the security and integrity of your account, we kindly request that you verify your email address.</p>" .
                 "<p>Please click on the following link to verify your email:</p>" .
-                "<p><a href='" . route('verified_email') . "'>Verify Email</a></p>" .
+                "<p><a href='{$verificationUrl}'>Verify Email</a></p>" .
                 "<p>By verifying your email address, you will gain full access to your account and enjoy all the benefits and features offered by Quantum Network.</p>" .
                 "<p>If you did not create an account with Quantum Network, please ignore this email. Your security is important to us, and we apologize for any inconvenience caused.</p>" .
                 "<p>If you have any questions or need assistance, please feel free to contact our support team at <a href='{$this->supportedMail}'>{$this->supportedMail}</a> or <a href='tel:{$this->supportedPhone}'>{$this->supportedPhone}</a>.</p>" .

@@ -4,12 +4,14 @@ namespace App\Http\Controllers\partner;
 
 use App\Http\Controllers\Controller;
 // use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\Partner\Partner;
 // use PHPMailer\PHPMailer\PHPMailer;
 // use PHPMailer\PHPMailer\Exception;
 use Illuminate\Support\Facades\Redirect;
 use App\Rules\ActiveUrl;
+
 
 class PartnerRegistrationController extends Controller
 {
@@ -111,7 +113,24 @@ class PartnerRegistrationController extends Controller
         // }
     }
 
-    public function verifiedEmail(){
-        echo 'email verified';
-    }
+    // changing status as email verified
+        
+    public function verifiedEmail(Request $request, $token)
+    {
+        // Retrieve the user based on the verification token
+        $verification = DB::table('verification_tokens')->where('token', $token)->first();
+
+        if ($verification) {
+            // Update the email_verified field to 1 for the user
+            Partner::where('email', $verification->email)->update(['email_verified' => 1]);
+            
+            // Optionally, you can delete the verification token from the table
+            DB::table('verification_tokens')->where('token', $token)->delete();
+            
+
+            return 'Email verified successfully!';
+        } else {
+            return 'Invalid verification token.';
+        }
+}
 }

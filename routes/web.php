@@ -26,9 +26,8 @@ Route::post('partner_registration', [PartnerRegistrationController::class,'formV
 
 Route::get('e_verification_mail', [PhpMailerController::class,'verficationmailsenderToPartner'])->name('verification_mailsender');
 
-Route::get('verified_email', [PartnerRegistrationController::class, 'verifiedEmail'])->name('verified_email');
+Route::get('/verify-email/{token}', [PartnerRegistrationController::class, 'verifiedEmail'])->name('verify_email');
 
-// Route::get('test', [Country_State_City_Controller::class,'captcha_genrator']);
 
 Route::prefix('admin')->group(function () {
     // Routes that belong to the admin section
