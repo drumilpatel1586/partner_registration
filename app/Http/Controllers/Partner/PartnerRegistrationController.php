@@ -3,21 +3,26 @@
 namespace App\Http\Controllers\partner;
 
 use App\Http\Controllers\Controller;
-// use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\Partner\Partner;
-// use PHPMailer\PHPMailer\PHPMailer;
-// use PHPMailer\PHPMailer\Exception;
 use Illuminate\Support\Facades\Redirect;
 use App\Rules\ActiveUrl;
-
+// use Illuminate\Validation\Rule;
+// use Illuminate\Validation\ValidationException;
 
 class PartnerRegistrationController extends Controller
 {
     public function formValidation(Request $request)
     {
-        // Preprocess the website URL to add http:// if missing
+        // Check if partner with the provided email already exists
+        $existingPartner = Partner::where('email', $request->input('mail'))->first();
+
+        if ($existingPartner) {
+            // Return a message indicating that the partner already exists
+            return redirect('/')->with('error', 'Partner with this email already exists.');
+        }
+
         $website = $request->input('website');
         if (!preg_match('/^https?:\/\//', $website)) {
             $website = 'http://' . $website;
@@ -114,7 +119,7 @@ class PartnerRegistrationController extends Controller
     }
 
     // changing status as email verified
-        
+
     public function verifiedEmail(Request $request, $token)
     {
         // Retrieve the user based on the verification token
@@ -123,14 +128,13 @@ class PartnerRegistrationController extends Controller
         if ($verification) {
             // Update the email_verified field to 1 for the user
             Partner::where('email', $verification->email)->update(['email_verified' => 1]);
-            
+
             // Optionally, you can delete the verification token from the table
             DB::table('verification_tokens')->where('token', $token)->delete();
-            
 
-            return 'Email verified successfully!';
+            return redirect('/')->with('success', 'Email verified successfully!');
         } else {
-            return 'Invalid verification token.';
+            return redirect('/')->with('error', 'Invalid verification token.');
         }
-}
+    }
 }

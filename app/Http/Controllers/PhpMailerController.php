@@ -20,7 +20,7 @@ class PhpMailerController extends Controller
         ];
     }
     public function verficationmailsenderToPartner(Request $request)
-    {
+    {   
         try {
             // Get supported mail and phone
             $supported = $this->supportedthings();
@@ -32,6 +32,7 @@ class PhpMailerController extends Controller
 
             // Redirect the user to another page
             return redirect('/')->with('success','Partner Successfully Registered, For Security reasons please verify your email address, We have sent you a verification email on registered email address.');
+            
         } catch (Exception $e) {
             // Handle any exceptions that may occur
             return redirect('/')->with('error', 'Failed to send verification email');
