@@ -3,11 +3,10 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\partner\Country_State_City_Controller;
-use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\NSH\NSHController;
 use App\Http\Controllers\Partner\CaptchaController;
 use App\Http\Controllers\partner\PartnerRegistrationController;
 use App\Http\Controllers\PhpMailerController;
-use App\Http\Controllers\MailVerifiedController;
 
 
 Route::get('/', function () {
@@ -29,10 +28,9 @@ Route::get('e_verification_mail', [PhpMailerController::class,'verficationmailse
 Route::get('/verify-email/{token}', [PartnerRegistrationController::class, 'verifiedEmail'])->name('verify_email');
 
 
-Route::prefix('admin')->group(function () {
+Route::prefix('nsh')->group(function () {
     // Routes that belong to the admin section
-    Route::get('dashboard', [AdminController::class,'dashboard']);
+    Route::get('dashboard', [NSHController::class,'dashboard']);
 });
-
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

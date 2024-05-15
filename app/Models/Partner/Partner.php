@@ -25,7 +25,5 @@ class Partner extends Model
        'mobile',
         'landline',
        'email'
-    //    'email_verified',
-    //    'admin_verified'
     ];
 }
