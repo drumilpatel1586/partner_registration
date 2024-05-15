@@ -9,27 +9,40 @@ use App\Models\Partner\Partner;
 // use PHPMailer\PHPMailer\PHPMailer;
 // use PHPMailer\PHPMailer\Exception;
 use Illuminate\Support\Facades\Redirect;
+use App\Rules\ActiveUrl;
 
 class PartnerRegistrationController extends Controller
 {
     public function formValidation(Request $request)
     {
+        // Preprocess the website URL to add http:// if missing
+        $website = $request->input('website');
+        if (!preg_match('/^https?:\/\//', $website)) {
+            $website = 'http://' . $website;
+            $request->merge(['website' => $website]);
+        }
+
         $request->validate([
-            'company_name' => 'required|max:20',
-            'address' => 'required',
+            'company_name' => 'required|max:20|regex:/^[a-zA-Z\s.]+$/',
+            'address' => 'required|max:255|regex:/^[a-zA-Z0-9\s,.\'\/\-]+$/',
             'select_country' => 'required',
             'select_state' => 'required',
             'select_city' => 'required',
             'zip' => 'required|numeric|digits:6',
-            'website' => 'required|url|max:255',
-            'landline' => 'required|numeric|digits:10',
-            'first_name' => 'required|max:30',
-            'last_name' => 'required|max:30',
-            'job_title' => 'required|max:20',
+            'website' => ['required', 'url', 'max:255', new ActiveUrl],
+            'landline' => 'required|numeric',
+            'first_name' => 'required|max:30|regex:/^[a-zA-Z]+$/',
+            'last_name' => 'required|max:30|regex:/^[a-zA-Z]+$/',
+            'job_title' => 'required|max:20|regex:/^[a-zA-Z\s]+$/',
             'mobile' => 'required|numeric|digits:10',
-            'personal_landline' => 'required|numeric|digits:10',
+            'personal_landline' => 'required|numeric',
             'mail' => 'required|email|max:255',
             'captcha' => 'required|captcha'
+        ], [
+            'company_name.regex' => 'The company name must only contain letters with spaces without special characters and symbols.',
+            'first_name.regex' => 'The first name must only contain letters without spaces and special characters.',
+            'last_name.regex' => 'The last name must only contain letters without spaces and special characters.',
+            'address.regex' => 'The address can only contain letters, numbers, spaces, commas, periods, apostrophes, slashes, and hyphens.',
         ]);
 
         Partner::create([
@@ -73,19 +86,19 @@ class PartnerRegistrationController extends Controller
         //     <br>
 
         //     <p>Thank you for registering with Quantum Network. To ensure the security and integrity of your account, we kindly request that you verify your email address.</p>
-    
+
         //     <p>Please click on the following link to verify your email:</p>
-            
+
         //     <p><a href='https://127.0.0.1:8000/verified_email'>Verify Email</a></p>
-            
+
         //     <p>By verifying your email address, you will gain full access to your account and enjoy all the benefits and features offered by Quantum Network.</p>
-            
+
         //     <p>If you did not create an account with Quantum Network, please ignore this email. Your security is important to us, and we apologize for any inconvenience caused.</p>
-            
+
         //     <p>If you have any questions or need assistance, please feel free to contact our support team at <a href='" . env('SUPPORT_EMAIL') . "'>" . env('SUPPORT_EMAIL') . "</a> or <a href='tel:" . env('SUPPORT_PHONE') . "'>" . env('SUPPORT_PHONE') . "</a>.</p>
-            
+
         //     <p>Thank you for choosing Quantum Network. We look forward to serving you.</p>
-            
+
         //     <p>Best regards,<br>Quantum Network</p>";
 
         //     if (!$mail->send()) {

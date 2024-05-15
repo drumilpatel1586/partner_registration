@@ -105,7 +105,7 @@
                     <span class="text-danger">{{ $errors->first('website') }}</span>
                 </div>
                 <div class="col-md-6">
-                    <input type="tel" maxlength="10" class="form-control" value="{{old('landline')}}" name="landline" placeholder="Landline">
+                    <input type="tel" maxlength="15" class="form-control" value="{{old('landline')}}" name="landline" placeholder="Landline">
                     <span class="text-danger">{{ $errors->first('landline') }}</span>
                 </div>
                 {{-- General Information End --}}
@@ -143,7 +143,7 @@
                 </div>
 
                 <div class="col-md-6">
-                    <input type="text" maxlength="10" value="{{old('personal_landline')}}" class="form-control" name="personal_landline"
+                    <input type="text" maxlength="15" value="{{old('personal_landline')}}" class="form-control" name="personal_landline"
                         placeholder="Landline">
                     <span class="text-danger">{{ $errors->first('personal_landline') }}</span>
                 </div>
