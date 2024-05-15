@@ -30,7 +30,10 @@ Route::get('/verify-email/{token}', [PartnerRegistrationController::class, 'veri
 
 Route::prefix('nsh')->group(function () {
     // Routes that belong to the admin section
-    Route::get('dashboard', [NSHController::class,'dashboard']);
+    Route::get('dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+

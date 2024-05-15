@@ -5,11 +5,11 @@ namespace App\Models\NSH;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class nsh extends Model
+class nshs extends Model
 {
     use HasFactory;
 
-    protected $table = 'nsh';
+    protected $table = 'nshs';
 
     protected $fillable = [
         'email',
