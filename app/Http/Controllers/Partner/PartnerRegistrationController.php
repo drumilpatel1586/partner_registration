@@ -110,4 +110,8 @@ class PartnerRegistrationController extends Controller
         //     echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
         // }
     }
+
+    public function verifiedEmail(){
+        echo 'email verified';
+    }
 }

@@ -16,16 +16,17 @@ Route::get('/', function () {
 
 
 Route::get('partner_registration', [Country_State_City_Controller::class,'renderCountriesView'])->name('partner.registration');
-Route::post('partner_registration', [PartnerRegistrationController::class,'formValidation']);
 
 Route::get('states/{country_id}', [Country_State_City_Controller::class,'getstates']);
 Route::get('cities/{state_id}', [Country_State_City_Controller::class,'getcities']);
 
 Route::get('reloadCaptcha', [CaptchaController::class,'reloadCaptcha']);
 
+Route::post('partner_registration', [PartnerRegistrationController::class,'formValidation']);
+
 Route::get('e_verification_mail', [PhpMailerController::class,'verficationmailsenderToPartner'])->name('verification_mailsender');
 
-Route::get('/verified_email', [MailVerifiedController::class, 'verifiedEmail'])->name('verified_email');
+Route::get('verified_email', [PartnerRegistrationController::class, 'verifiedEmail'])->name('verified_email');
 
 // Route::get('test', [Country_State_City_Controller::class,'captcha_genrator']);
 
