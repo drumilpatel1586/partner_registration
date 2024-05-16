@@ -3,7 +3,7 @@
 @section('content')
 
         <div>
-            <livewire:nsh>
+            <livewire:nshdashboard>
         </div>
     
 @endsection

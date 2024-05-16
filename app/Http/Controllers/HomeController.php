@@ -23,6 +23,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        return view('NSH.index');
+    }
+
+    public function countrymaster()
+    {
+        return view('NSH.countries_master');
     }
 }
+    
