@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Partner\Partner;
 use Illuminate\Support\Facades\Redirect;
 use App\Rules\ActiveUrl;
+use App\Http\Requests\PostPartnerRegistrationRequest;
 // use Illuminate\Validation\Rule;
 // use Illuminate\Validation\ValidationException;
 
@@ -30,7 +31,7 @@ class PartnerRegistrationController extends Controller
         }
 
         $request->validate([
-            'company_name' => 'required|max:20|regex:/^[a-zA-Z\s.]+$/',
+            'company_name' => 'required|max:30|regex:/^[a-zA-Z\s.]+$/',
             'address' => 'required|max:255|regex:/^[a-zA-Z0-9\s,.\'\/\-]+$/',
             'select_country' => 'required',
             'select_state' => 'required',
@@ -69,55 +70,17 @@ class PartnerRegistrationController extends Controller
             'email' => $request->mail
         ]);
 
+        
         $request = http_build_query($request->all());
         return Redirect::to("/e_verification_mail?$request");
-
-        // require base_path('vendor/autoload.php');
-        // $mail = new Phpmailer(true);
-
-        // try {
-        //     $mail->isSMTP();
-        //     $mail->Host       = 'smtp.gmail.com';
-        //     $mail->SMTPAuth   = true;
-        //     $mail->Username   = 'noblecausesamd@gmail.com';
-        //     $mail->Password   = 'orwc htbg ydcq ecke';
-        //     $mail->SMTPSecure = 'tls';  // Corrected from 'tsl'
-        //     $mail->Port       = 587;
-
-        //     $mail->setFrom(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME'));
-        //     $mail->addAddress($request->mail, $request->first_name);
-
-        //     $mail->isHTML(true);
-        //     $mail->Subject = 'Account Verification Required - Please Confirm Your Email Address';
-        //     $mail->Body = "Dear $request->first_name $request->last_name,
-        //     <br>
-
-        //     <p>Thank you for registering with Quantum Network. To ensure the security and integrity of your account, we kindly request that you verify your email address.</p>
-
-        //     <p>Please click on the following link to verify your email:</p>
-
-        //     <p><a href='https://127.0.0.1:8000/verified_email'>Verify Email</a></p>
-
-        //     <p>By verifying your email address, you will gain full access to your account and enjoy all the benefits and features offered by Quantum Network.</p>
-
-        //     <p>If you did not create an account with Quantum Network, please ignore this email. Your security is important to us, and we apologize for any inconvenience caused.</p>
-
-        //     <p>If you have any questions or need assistance, please feel free to contact our support team at <a href='" . env('SUPPORT_EMAIL') . "'>" . env('SUPPORT_EMAIL') . "</a> or <a href='tel:" . env('SUPPORT_PHONE') . "'>" . env('SUPPORT_PHONE') . "</a>.</p>
-
-        //     <p>Thank you for choosing Quantum Network. We look forward to serving you.</p>
-
-        //     <p>Best regards,<br>Quantum Network</p>";
-
-        //     if (!$mail->send()) {
-        //         echo 'Mail send failed';
-        //     } else {
-        //         echo 'Mail sent successfully';
-        //     }
-        // } catch (Exception $e) {
-        //     echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-        // }
+        
     }
+    
+    // public function store(PostPartnerRegistrationRequest $request){
 
+    //     Partner::create($request->all());
+    //     return redirect('/')->with('success', 'Partner registration successful!');
+    // }
     // changing status as email verified
 
     public function verifiedEmail(Request $request, $token)

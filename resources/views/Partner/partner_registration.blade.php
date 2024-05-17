@@ -132,14 +132,15 @@
                         placeholder="Job Title">
                     <span class="text-danger">{{ $errors->first('job_title') }}</span>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6 error_div">
                     <div class="mobile_no form-control">
                         <span class="text-muted" id="countrycode"></span>
                         <input style="border-color: transparent; outline: none;" maxlength="10" name="mobile"
                             type="tel" class="mobile" value="{{ old('mobile') }}" placeholder="Mobile">
                     </div>
-                    <span class="text-danger">{{ $errors->first('mobile') }}</span>
+                    <span class="text-danger mobile-error">{{ $errors->first('mobile') }}</span>
                 </div>
+
 
                 <div class="col-md-6">
                     <input type="text" maxlength="15" value="{{ old('personal_landline') }}"
@@ -177,6 +178,10 @@
 
     {{-- #################################  js files  ################################## --}}
     <script src="{{ asset('js/partner_registration.js') }}"></script>
+
+    <script type="text/javascript" src="{{ asset('vendor\jsvalidation\js\jsvalidation.js') }}"></script>
+
+    {!! JsValidator::formRequest('App\Http\Requests\PostPartnerRegistrationRequest') !!}
 </body>
 
 </html>

@@ -38,6 +38,7 @@ class SendVerificationEmailJob implements ShouldQueue
                 'email' => $this->formData['mail'],
                 'token' => $verificationToken,
                 'created_at' => now(),
+                'token_type' => 'email_verification',
             ]);
 
             // Initialize PHPMailer
