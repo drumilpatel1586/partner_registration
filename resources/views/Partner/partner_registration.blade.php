@@ -11,12 +11,8 @@
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     </link>
 
-    {{-- mobile number with country flage git file --}}
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@22.0.2/build/css/intlTelInput.css">
-    <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@22.0.2/build/js/intlTelInput.min.js"></script>
-
     {{-- css file --}}
-    <link rel="stylesheet" type="text/css" href="{{ asset('partner-assets/css/partner_registration.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/partner_registration.css') }}">
 
     {{-- font awsome link --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
@@ -179,7 +175,6 @@
             </form>
         </section>
     </div>
-
 
     {{-- #################################  js files  ################################## --}}
 

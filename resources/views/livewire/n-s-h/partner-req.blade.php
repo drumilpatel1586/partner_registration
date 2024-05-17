@@ -5,7 +5,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1></h1>
+                        <h1>Country Master</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
@@ -47,35 +47,27 @@
                                                 <thead>
                                                     <tr>
                                                         <th scope="col">No.</th>
-                                                        <th scope="col">Country</th>
-                                                        <th scope="col">Short Name</th>
-                                                        <th scope="col">Phone Code</th>
-                                                        <th scope="col">Active Status</th>
+                                                        <th scope="col">First Name</th>
+                                                        <th scope="col">Last Name</th>
+                                                        <th scope="col">Email</th>
+                                                        <th scope="col">Action</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    @foreach ($countries as $country)
+                                                    @foreach ($partners as $partner)
                                                         <tr>
                                                             <th scope="row">{{ $loop->iteration }}</th>
-                                                            <td>{{ $country->name }}</td>
-                                                            <td>{{ $country->shortname }}</td>
-                                                            <td>{{ $country->phonecode }}</td>
-                                                            <td style="cursor: pointer;">
-                                                                <a href="country/{{ $country->id }}">
-                                                                    @if ($country->is_active)
-                                                                        <!-- Green tick -->
-                                                                        <i class="fa fa-check-circle text-success"></i>
-                                                                    @else
-                                                                        <!-- Red cross -->
-                                                                        <i class="fa fa-times-circle text-danger"></i>
-                                                                    @endif
-                                                                </a>
+                                                            <td>{{ $partner->first_name }}</td>
+                                                            <td>{{ $partner->last_name }}</td>
+                                                            <td>{{ $partner->email }}</td>
+                                                            <td>
+                                                                <button type="button" class="btn btn-info">View</button>
+                                                                <button type="button" class="btn btn-success">Approve</button>
                                                             </td>
                                                         </tr>
                                                     @endforeach
                                                 </tbody>
                                             </table>
-
                                         </div>
                                     </div>
                                 </div>

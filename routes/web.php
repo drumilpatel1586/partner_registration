@@ -14,6 +14,8 @@ use App\Http\Controllers\PhpMailerController;
 
 use App\Http\Controllers\CountriesController;
 
+use App\Http\Controllers\NSH\PartnerRequest;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -43,6 +45,8 @@ Route::prefix('nsh')->group(function () {
         Route::get('countrymaster', [App\Http\Controllers\HomeController::class, 'countrymaster'])->name('countrymaster');
 
         Route::get('country/{id}', [CountriesController::class, 'CountryManage'])->name('CountryManage');
+
+        Route::get('partner/request', [PartnerRequest::class, 'PartnerRequest'])->name('PartnerRequest');
     });
 });
 

@@ -15,11 +15,4 @@ class CountriesMaster extends Component
             'countries' => $this->countries
         ]);
     }
-
-    public function toggleIsActive($countryId)
-    {
-        $country = countries::findOrFail($countryId);
-        $country->is_active = !$country->is_active;
-        $country->save();
-    }
 }

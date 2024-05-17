@@ -296,36 +296,30 @@ return [
     'menu' => [
         // Navbar items:
         [
-            'type' => 'navbar-search',
-            'text' => 'search',
-            'topnav_right' => true,
-        ],
-        [
             'type' => 'fullscreen-widget',
             'topnav_right' => true,
         ],
 
         // Sidebar items:
         [
-            'type' => 'sidebar-menu-search',
-            'text' => 'search',
-        ],
-        [
             'text' => 'blog',
             'url' => 'admin/blog',
             'can' => 'manage-blog',
         ],
         [
-            'text' => 'pages',
-            'url' => 'admin/pages',
-            'icon' => 'far fa-fw fa-file',
-            'label' => 4,
-            'label_color' => 'success',
+            'text' => 'Dashboard',
+            'url' => 'nsh/dashboard',
+            'icon' => 'fa-solid fa-gauge-simple-high',
         ],
-        ['header' => 'account_settings'],
+        ['header' => 'MANAGE'],
         [
-            'text' => 'profile',
-            'url' => 'admin/settings',
+            'text' => 'Partner Request',
+            'url' => 'nsh/manage/partner/request',
+            'icon' => 'fas fa-fw fa-user',
+        ],
+        [
+            'text' => 'Active Country',
+            'url' => 'nsh/manage/countrymaster',
             'icon' => 'fas fa-fw fa-user',
         ],
         [
