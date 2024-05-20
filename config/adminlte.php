@@ -323,6 +323,16 @@ return [
             'icon' => 'fas fa-fw fa-user',
         ],
         [
+            'text' => 'Active States',
+            'url' => 'nsh/manage/statemaster',
+            'icon' => 'fas fa-fw fa-user',
+        ],
+        [
+            'text' => 'Active Cities',
+            'url' => 'nsh/manage/citymaster',
+            'icon' => 'fas fa-fw fa-user',
+        ],
+        [
             'text' => 'change_password',
             'url' => 'admin/settings',
             'icon' => 'fas fa-fw fa-lock',

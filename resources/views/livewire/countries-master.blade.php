@@ -57,7 +57,7 @@
                                                     @foreach ($countries as $country)
                                                         <tr>
                                                             <th scope="row">{{ $loop->iteration }}</th>
-                                                            <td>{{ $country->name }}</td>
+                                                            <td class="country">{{ $country->name }}</td>
                                                             <td>{{ $country->shortname }}</td>
                                                             <td>{{ $country->phonecode }}</td>
                                                             <td style="cursor: pointer;">

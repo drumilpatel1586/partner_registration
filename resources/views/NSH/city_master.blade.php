@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <livewire:countries-master>
+    <livewire:city-master>
 
 @endsection
 
@@ -13,7 +13,7 @@
             var searchText = $('#searchInput').val().toLowerCase();
 
             $('tbody tr').each(function() {
-                var countryName = $(this).find('.country').text().toLowerCase();
+                var countryName = $(this).find('td:eq(1)').text().toLowerCase();
                 var shortName = $(this).find('td:eq(2)').text().toLowerCase();
                 var phoneCode = $(this).find('td:eq(3)').text().toLowerCase();
 

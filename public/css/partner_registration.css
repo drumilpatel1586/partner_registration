@@ -132,7 +132,7 @@ body {
 .form-control.is-valid{
   border-color: #d2d6de !important;
   border-right: 1px solid red !important;
-  /* background-image: none !important; */
+  background-image: none !important;
 }
 
 .form-select.is-valid{

@@ -11,7 +11,7 @@ $(document).ready(function () {
     });
 
 
-    // js for county state and city filter
+    // js for county code 
     const countrySelect = document.getElementById('select_country');
     const countryCodeSpan = document.getElementById('countrycode');
 

@@ -8,9 +8,6 @@ use Illuminate\Http\Request;
 use App\Models\Partner\Partner;
 use Illuminate\Support\Facades\Redirect;
 use App\Rules\ActiveUrl;
-use App\Http\Requests\PostPartnerRegistrationRequest;
-// use Illuminate\Validation\Rule;
-// use Illuminate\Validation\ValidationException;
 
 class PartnerRegistrationController extends Controller
 {
@@ -72,15 +69,10 @@ class PartnerRegistrationController extends Controller
 
         
         $request = http_build_query($request->all());
-        return Redirect::to("/e_verification_mail?$request");
+        return Redirect::to("/emailverification?$request");
         
     }
-    
-    // public function store(PostPartnerRegistrationRequest $request){
 
-    //     Partner::create($request->all());
-    //     return redirect('/')->with('success', 'Partner registration successful!');
-    // }
     // changing status as email verified
 
     public function verifiedEmail(Request $request, $token)
@@ -93,7 +85,7 @@ class PartnerRegistrationController extends Controller
             Partner::where('email', $verification->email)->update(['email_verified' => 1]);
 
             // Optionally, you can delete the verification token from the table
-            DB::table('verification_tokens')->where('token', $token)->delete();
+            DB::table('verification_tokens')->where('token', $token)->update(['updated_at'=>time()]);
 
             return redirect('/')->with('success', 'Email verified successfully!');
         } else {

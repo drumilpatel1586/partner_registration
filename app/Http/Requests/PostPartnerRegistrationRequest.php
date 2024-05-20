@@ -33,7 +33,7 @@ class PostPartnerRegistrationRequest extends FormRequest
             'select_state' => 'required',
             'select_city' => 'required',
             'zip' => 'required|numeric|digits:6',
-            'website' => ['required', 'url', 'max:255', new ActiveUrl],
+            'website' => 'required',
             'landline' => 'required|numeric',
             'first_name' => 'required|max:30|regex:/^[a-zA-Z]+$/',
             'last_name' => 'required|max:30|regex:/^[a-zA-Z]+$/',

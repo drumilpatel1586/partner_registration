@@ -3,12 +3,22 @@
 namespace App\Http\Controllers\NSH;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PartnerRequest extends Controller
 {
-    public function PartnerRequest(){
-        
+    public $partner;
+
+    public function PartnerRequest()
+    {
+
         return view('nsh.partner_request');
+    }
+
+    public function partnerapproved($partner_id)
+    {
+        DB::table('partners')->where('partner_id', $partner_id)->update(['admin_verified' => 1]);
+
+        return back();
     }
 }

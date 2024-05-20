@@ -13,14 +13,17 @@ class e_verification_mail extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $mailmessage;
+    public $subject;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($mailmessage , $subject)
     {
-        //
+        $this->mailmessage = $mailmessage;
+        $this->subject = $subject;
     }
 
     /**
@@ -31,7 +34,7 @@ class e_verification_mail extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: 'Email Verification Mail',
+            subject: $this->subject,
         );
     }
 
@@ -43,7 +46,7 @@ class e_verification_mail extends Mailable
     public function content()
     {
         return new Content(
-            view: 'view.name',
+            view: 'mail-template.EmailVerification',
         );
     }
 

@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <livewire:countries-master>
+    <livewire:state-master>
 
 @endsection
 
@@ -13,12 +13,10 @@
             var searchText = $('#searchInput').val().toLowerCase();
 
             $('tbody tr').each(function() {
-                var countryName = $(this).find('.country').text().toLowerCase();
-                var shortName = $(this).find('td:eq(2)').text().toLowerCase();
-                var phoneCode = $(this).find('td:eq(3)').text().toLowerCase();
+                var statename = $(this).find('.state').text().toLowerCase();
+                var countryname = $(this).find('td:eq(2)').text().toLowerCase();
 
-                if (countryName.includes(searchText) || shortName.includes(searchText) ||
-                    phoneCode.includes(searchText)) {
+                if (statename.includes(searchText) || countryname.includes(searchText)){
                     $(this).show();
                 } else {
                     $(this).hide();

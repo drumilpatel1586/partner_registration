@@ -16,4 +16,9 @@ class countries extends Model
         'country_code',
         'country_phonecode',
     ];
+
+    public function states()
+    {
+        return $this->hasMany(States::class);
+    }
 }

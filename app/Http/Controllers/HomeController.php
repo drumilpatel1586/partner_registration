@@ -30,5 +30,12 @@ class HomeController extends Controller
     {
         return view('NSH.countries_master');
     }
+
+    public function statemaster(){
+        return view('NSH.state_master');
+    }
+    public function citymaster(){
+        return view('NSH.city_master');
+    }
 }
     

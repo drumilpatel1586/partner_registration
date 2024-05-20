@@ -1116,27 +1116,20 @@
         </div>
     </div>
 
-    @if (session('success'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <strong>Success!</strong> {{ session('success') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    @endif  
-
     <script>
         window.onload = function() {
-            var successMessage = "{{ session('success') }}";
-            if (successMessage) {
-                alert(successMessage);
+            var errorMessage = "{{ session('error') }}";
+            if (errorMessage) {
+                alert(errorMessage);
             }
         }
     </script>
 
     <script>
         window.onload = function() {
-            var errorMessage = "{{ session('error') }}";
-            if (errorMessage) {
-                alert(errorMessage);
+            var successMessage = "{{ session('success') }}";
+            if (successMessage) {
+                alert(successMessage);
             }
         }
     </script>

@@ -5,12 +5,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Country Master</h1>
+                        <h1></h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{ route('NSHhome') }}">Dashboard</a></li>
-                            <li class="breadcrumb-item active">Country Master</li>
+                            <li class="breadcrumb-item active">State Master</li>
                         </ol>
                     </div>
                 </div>
@@ -47,31 +47,35 @@
                                                 <thead>
                                                     <tr>
                                                         <th scope="col">No.</th>
-                                                        <th scope="col">First Name</th>
-                                                        <th scope="col">Last Name</th>
-                                                        <th scope="col">Email</th>
-                                                        <th scope="col">Action</th>
+                                                        <th scope="col">City</th>
+                                                        {{-- <th scope="col">State</th> --}}
+                                                        {{-- <th scope="col">Country</th> --}}
+                                                        <th scope="col">Active Status</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    @foreach ($partners as $partner)
+                                                    @foreach ($cities as $city)
                                                         <tr>
                                                             <th scope="row">{{ $loop->iteration }}</th>
-                                                            <td>{{ $partner->first_name }}</td>
-                                                            <td>{{ $partner->last_name }}</td>
-                                                            <td>{{ $partner->email }}</td>
-                                                            <td>
-                                                                <button type="button"
-                                                                    class="btn btn-info">View</button>
-                                                                <a href="{{ route('partnerapproved', ['partner_id' => $partner->partner_id]) }}">
-                                                                    <button type="button"
-                                                                        class="btn btn-success">Approve</button>
+                                                            <td>{{ $city->name }}</td>
+                                                            {{-- <td>{{ $city->state->name}}</td> --}}
+                                                            {{-- <td>{{ $city->state->country->name}}</td> --}}
+                                                            <td style="cursor: pointer;">
+                                                                <a href="city/{{ $city->id }}">
+                                                                    @if ($city->is_active)
+                                                                        <!-- Green tick -->
+                                                                        <i class="fa fa-check-circle text-success"></i>
+                                                                    @else
+                                                                        <!-- Red cross -->
+                                                                        <i class="fa fa-times-circle text-danger"></i>
+                                                                    @endif
                                                                 </a>
                                                             </td>
                                                         </tr>
                                                     @endforeach
                                                 </tbody>
                                             </table>
+
                                         </div>
                                     </div>
                                 </div>
