@@ -67,7 +67,9 @@
                         aria-label="Default select example">
                         <option selected disabled>Select Country</option>
                         @foreach ($countries as $country)
-                            <option value="{{ $country->id }}" data-country-phonecode="{{ $country->phonecode }}">
+                            <option value="{{ $country->id }}"
+                                {{ old('select_country') == $country->id ? 'selected' : '' }}
+                                data-country-phonecode="{{ $country->phonecode }}">
                                 {{ $country->name }}
                             </option>
                         @endforeach

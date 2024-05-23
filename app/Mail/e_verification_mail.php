@@ -15,15 +15,26 @@ class e_verification_mail extends Mailable
 
     public $mailmessage;
     public $subject;
+    public $firstname;
+    public $lastname;
+    public $supportedPhone;
+    public $supportedMail;
+    public $token;
+
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($mailmessage , $subject)
+    public function __construct($mailmessage, $subject, $firstname, $lastname, $supportedPhone, $supportedMail, $token)
     {
         $this->mailmessage = $mailmessage;
         $this->subject = $subject;
+        $this->firstname = $firstname;
+        $this->lastname = $lastname;
+        $this->supportedPhone = $supportedPhone;
+        $this->supportedMail = $supportedMail;
+        $this->token = $token;
     }
 
     /**
@@ -46,17 +57,7 @@ class e_verification_mail extends Mailable
     public function content()
     {
         return new Content(
-            view: 'mail-template.EmailVerification',
+            view: 'mail-template.PartnerVerification',
         );
-    }
-
-    /**
-     * Get the attachments for the message.
-     *
-     * @return array
-     */
-    public function attachments()
-    {
-        return [];
     }
 }

@@ -48,6 +48,7 @@ class PartnerRegistrationController extends Controller
             'first_name.regex' => 'The first name must only contain letters without spaces and special characters.',
             'last_name.regex' => 'The last name must only contain letters without spaces and special characters.',
             'address.regex' => 'The address can only contain letters, numbers, spaces, commas, periods, apostrophes, slashes, and hyphens.',
+            'captcha.captcha' => 'Please enter a valid captcha number'
         ]);
 
         Partner::create([
@@ -67,10 +68,8 @@ class PartnerRegistrationController extends Controller
             'email' => $request->mail
         ]);
 
-        
         $request = http_build_query($request->all());
         return Redirect::to("/emailverification?$request");
-        
     }
 
     // changing status as email verified
@@ -78,17 +77,25 @@ class PartnerRegistrationController extends Controller
     public function verifiedEmail(Request $request, $token)
     {
         // Retrieve the user based on the verification token
-        $verification = DB::table('verification_tokens')->where('token', $token)->first();
+        $verification = DB::table('verification_tokens')->where([
+            'token' => $token,
+            'status' => 0
+        ])->first();
 
         if ($verification) {
             // Update the email_verified field to 1 for the user
             Partner::where('email', $verification->email)->update(['email_verified' => 1]);
 
             // Optionally, you can delete the verification token from the table
-            DB::table('verification_tokens')->where('token', $token)->update(['updated_at'=>time()]);
+            DB::table('verification_tokens')
+                ->where('token', $token)
+                ->update([
+                    'updated_at' => now(),
+                    'status' => 1
+                ]);
 
-            return redirect('/')->with('success', 'Email verified successfully!');
-        } else {
+                return redirect('/')->with('success', 'Email verified successfully!');
+            } else {
             return redirect('/')->with('error', 'Invalid verification token.');
         }
     }

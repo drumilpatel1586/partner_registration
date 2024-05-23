@@ -24,8 +24,7 @@ Route::get('states/{country_id}', [Country_State_City_Controller::class, 'getsta
 Route::get('cities/{state_id}', [Country_State_City_Controller::class, 'getcities']);
 Route::get('reloadCaptcha', [CaptchaController::class, 'reloadCaptcha']);
 Route::post('partner_registration', [PartnerRegistrationController::class, 'formValidation']);
-Route::get('e_verification_mail', [PhpMailerController::class, 'verficationmailsenderToPartner'])->name('verification_mailsender');
-Route::get('/verify-email/{token}', [PartnerRegistrationController::class, 'verifiedEmail'])->name('verify_email');
+Route::get('/verify-email/{token}', [PartnerRegistrationController::class, 'verifiedEmail'])->name('verify-email');
 Route::get('/partnerapproved/{partner_id}', [PartnerRequest::class, 'partnerapproved'])->name('partnerapproved');
 
 

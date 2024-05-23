@@ -1,0 +1,277 @@
+.error-message {
+    color: red;
+    font-size: 15px;
+}
+.invalid-feedback{
+     color: red;
+    font-size: 15px;
+    margin-left: 19px;
+}
+/* Style for invalid form fields */
+.is-invalid {
+    outline: 1px solid red;
+}
+.text-danger{
+     color: red;
+    font-size: 15px;
+}
+.login-box-body, .register-box-body {
+     padding-bottom: 0;
+}
+div.dataTables_paginate{
+        margin-top:0 !important;
+    }
+    .dataTables_wrapper .dataTables_paginate .paginate_button{padding: 0.5em 0;min-width:auto;}
+    .dataTables_wrapper .dataTables_paginate .paginate_button:hover{background: none !important;border:0;}
+    .tbl-btn-delete{padding: 5px 5px;}
+    .menucloudTitle span,.menucloudTitle i{color:#fff;}
+    .menucloudTitle:hover{background: #f15a22 !important;}
+    .menucloudTitle:hover span,.menucloudTitle:hover i{color:#2E3192;}
+    .sidebar-menu .dropdown-menu{width: 100%;}
+    .dropdown-menu > li > a:hover{color: rgb(242, 90, 34) !important;}
+    .brbottom0 td,.brbottom0 th{border: 0 !important;}
+    .search_box{/*margin-top: 6px;*/}
+    #deal_table2_wrapper #deal_table2_filter{display: none;}
+    #deal_table2_wrapper #deal_table2_length{margin-top: 13px;}
+    #deal_table2_wrapper #export_buttons{display: none;}
+    .section-title{color: #2d3192;font-size: 16px;}
+    .btn-qnsearch{font-size: 16px;}
+    .padding-r0{padding-right: 0 !important;}
+    .padding-l0{padding-left: 0 !important;}
+    .sidebar-menu .dropdown-menu>.active>a{color: #fff !important;background-color: #2d3192 !important;}
+    .logo-mini{margin-top: 15px;}
+    .sidebar-collapse .mm_down{margin-left: -3px;}
+    .reg-box-body .login-box{
+        margin: 5% auto !important;
+        width: 60%;
+        float: right;
+        margin-right: 20px !important;
+    }
+    .step_image{width: 100%;margin-bottom: 20px;}
+    .req {border-right: 1px solid red;}
+    .partner_reg_container input{
+     border-radius: 25px;
+     padding: 21px 25px 16px 3rem;
+}     
+.partner_reg_container select {
+    border-radius: 25px;
+    height: 38px;
+    padding: 10px 20px;
+}
+.partner_reg_container #signup {
+    border-radius: 25px;
+    padding: 10px 50px;
+    margin-top: 1em;
+}
+.reg-box-body .login-box {
+    margin: 0% auto !important;
+    width: 45%;
+    float: right;
+    margin-right: 5em !important;
+}
+
+body {
+    background-image: url("https://partner.qntmnet.com/public/images/qn_white.jpg");              
+    background-size: cover;
+}
+.login-form{
+     background-color: #f2f2f2 !important;
+     box-shadow: 0px 1px 20px #ccc;
+	 
+}
+.section-title{
+    width: 90%;
+    margin-left: 2em;
+    margin-top: 2px;
+    float: left;
+}
+#accept_terms {
+    float: left;
+    position: absolute;
+    bottom: 1em;
+}
+.panel-body{
+	padding-top:4px !important;
+	padding-bottom:4px !important;
+	
+}
+.login-box-body{
+     background:none !important;
+}
+.login-logo{
+     margin-bottom: 0 !important;
+}
+.login-logo img{
+     width: 216px;
+}
+
+/*STARTs - Floating Label*/
+
+.floating {
+  /*margin-bottom: 2rem;*/
+  background-color: var(--field__background);
+  transition: background-color 0.2s ease;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+}
+
+.floating:hover,
+.floating:focus-within {
+  background-color: var(--field__background--hover);
+}
+
+.floating__input {
+  padding: 1.8rem 1rem 0.6rem;
+  font-size: 1.4rem;
+  /*border-bottom: 0.1rem solid var(--input__border);*/
+  transition: border-color 0.2s ease;
+  caret-color: var(--color__accent);
+}
+
+.floating:hover .floating__input {
+  border-color: var(--input__border--hover);
+}
+
+.floating__input::placeholder {
+  color: rgba(0, 0, 0, 0);
+}
+
+.floating__label {
+  display: block;
+  position: relative;
+  max-height: 0;
+  font-weight: 500;
+  pointer-events: none;
+}
+
+.floating__label::before {
+  color: var(--label__color);
+  content: attr(data-content);
+  display: inline-block;
+  filter: blur(0);
+  backface-visibility: hidden;
+  transform-origin: left top;
+  transition: transform 0.2s ease;
+  left: 2rem;
+  position: relative;
+  top: -0.9rem;
+  color:#555;
+}
+
+.floating__label::after {
+  bottom: 1rem;
+  content: "";
+  height: 0.1rem;
+  position: absolute;
+  transition: transform 180ms cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 180ms cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s ease;
+  opacity: 0;
+  left: 0;
+  top: 100%;
+  margin-top: -0.1rem;
+  transform: scale3d(0, 1, 1);
+  width: 100%;
+  background-color: var(--color__accent);
+}
+
+.floating__input:focus + .floating__label::after {
+  transform: scale3d(1, 1, 1);
+  opacity: 1;
+}
+
+.floating__input:placeholder-shown + .floating__label::before {
+  transform: translate3d(0, -2.2rem, 0) scale3d(1, 1, 1);
+}
+
+.floating__label::before,
+.floating__input:focus + .floating__label::before {
+  transform: translate3d(0, -3.12rem, 0) scale3d(0.82, 0.82, 1);
+}
+
+.floating__input:focus + .floating__label::before {
+  color: var(--color__accent);
+}
+
+.hidden--visually {
+  border: 0;
+  clip: rect(1px 1px 1px 1px);
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+#mobile_code .iti--allow-dropdown{width: 100%;}
+#mobile_code ::placeholder {
+     padding : 10px !important;
+}
+#mobile_input::before {
+    left: 6rem !important;
+    top: -0.8rem !important;
+}
+
+
+
+
+/*ENDs - Floating Label*/
+
+
+@media  only screen and (max-width: 600px) {
+     .reg-box-body .login-box {
+         width: 94% !important;
+         margin-right: 10px !important;
+     }
+     .partner_reg_container #signup {
+         border-radius: 25px;
+         padding: 10px 50px;
+         width: 100%;
+     }
+     #accept_terms {
+         float: left;
+         position: initial;
+         text-align: left;
+     }
+     
+}
+
+#loader{
+  border: 6px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 6px solid #3498db;
+  position: absolute;
+  height: 50px;
+  width: 50px;
+  top: 50%;
+  left: 50%;
+  margin-left: -50px;
+  margin-top: -50px;
+  background-size: 100%;
+
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+animation: spin 2s linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+0% { -webkit-transform: rotate(0deg); }
+100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+0% { transform: rotate(0deg); }
+100% { transform: rotate(360deg); }
+}
+
+.spinner_overlay 
+{
+position: fixed;
+left: 0;
+top: 0;
+width: 100%;
+height: 100%;
+background-color: #fff;
+opacity: 0.2;
+z-index: 1000;
+}

@@ -7,10 +7,6 @@
     @hasSection('subtitle') | @yield('subtitle') @endif
 @stop
 
-@section('adminlte_css_pre')
-    <link rel="icon" href="https://crm.qntmnet.com/QN-CDN/images/favicon.png" type="image/x-icon">
-@stop
-
 {{-- Extend and customize the page content header --}}
 
 @section('content_header')
@@ -27,6 +23,7 @@
         </h1>
     @endif
 @stop
+
 
 {{-- Rename section content to content_body --}}
 

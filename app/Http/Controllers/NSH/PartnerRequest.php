@@ -19,6 +19,6 @@ class PartnerRequest extends Controller
     {
         DB::table('partners')->where('partner_id', $partner_id)->update(['admin_verified' => 1]);
 
-        return back();
+        return back()->with('success', 'Partner approved Successfully');
     }
 }

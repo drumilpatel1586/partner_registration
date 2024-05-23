@@ -1116,23 +1116,27 @@
         </div>
     </div>
 
-    <script>
-        window.onload = function() {
-            var errorMessage = "{{ session('error') }}";
-            if (errorMessage) {
-                alert(errorMessage);
-            }
-        }
-    </script>
+    @if (session()->has('error'))
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                var errorMessage = "{{ session('error') }}";
+                if (errorMessage) {
+                    alert(errorMessage);
+                }
+            });
+        </script>
+    @endif
 
-    <script>
-        window.onload = function() {
-            var successMessage = "{{ session('success') }}";
-            if (successMessage) {
-                alert(successMessage);
-            }
-        }
-    </script>
+    @if (session()->has('success'))
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                var successMessage = "{{ session('success') }}";
+                if (successMessage) {
+                    alert(successMessage);
+                }
+            });
+        </script>
+    @endif
 
 </body>
 

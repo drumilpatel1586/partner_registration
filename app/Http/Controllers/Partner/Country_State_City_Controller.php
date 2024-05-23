@@ -47,6 +47,6 @@ class Country_State_City_Controller extends Controller
         for ($i = 0; $i < 6; $i++) {
             $randomString .= $characters[rand(0, $charactersLength - 1)];
         }
-        return view('partner/partner_registration', ['captcha' => $randomString]);
+        return view('partner.partner_registration', ['captcha' => $randomString]);
     }
 }
