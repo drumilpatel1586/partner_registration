@@ -24,7 +24,7 @@ $(document).ready(function ()
         var updatedUrl = currentUrl.split('?')[0];
         window.location.href = updatedUrl;
     });
-    
+
     // Handle filter dropdown change event
     var filterValue = $('#approval_status_filter').data('filter');
     $('#approval_status_filter').on('change', function() {

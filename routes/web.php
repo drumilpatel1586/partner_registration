@@ -12,6 +12,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\EmailController;
 use App\Http\Controllers\StatesController;
 use App\Http\Controllers\CityController;
+use App\Http\Controllers\AuthController;
 
 
 Route::get('/', function () {
@@ -45,4 +46,7 @@ Route::prefix('nsh')->group(function () {
     });
 });
 
-Auth::routes();
+// Auth::routes();
+
+Route::get('login',[AuthController::class,'login'])->name('login'); 
+Route::post('login_check',[AuthController::class,'login_check'])->name('login_check'); 

@@ -86,7 +86,6 @@ class PartnerRegistrationController extends Controller
             // Update the email_verified field to 1 for the user
             Partner::where('email', $verification->email)->update(['email_verified' => 1]);
 
-            // Optionally, you can delete the verification token from the table
             DB::table('verification_tokens')
                 ->where('token', $token)
                 ->update([

@@ -1,4 +1,4 @@
-@extends('layouts.NSH.app')
+@extends('layouts.app')
 
 @section('content')
 
